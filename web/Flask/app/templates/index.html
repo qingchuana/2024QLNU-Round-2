@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Easy Python Calc</title>
+        <style>
+            #calc {
+                width: 60%; /* Adjust width as needed */
+                height: 200px; /* Adjust height as needed */
+            }
+            #formula {
+                width: 60%; /* Adjust width as needed */
+                margin-top: 12px; /* Adjust distance from the output box as needed */
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <iframe id="calc" src="/calc?calc=1-1&answer=0"></iframe>
+        </div>
+        <br>
+        <div>
+            <input id="formula" type="text" name="formula" value="1-1"><br>
+            <button type="button" onclick="getAnswer()">submit</button>
+        </div>
+    </body>
+</html>
+<!--/hint-->
+
+        <script>
+        function getAnswer() {
+            let src = "";
+            let formula = document.getElementById("formula").value;
+            try {
+                let answer = eval(formula);
+                if (Number.isInteger(answer)) {
+                    src = "/calc?calc=" + encodeURIComponent(formula) + "&answer=" + encodeURIComponent(answer);
+                } else {
+                    src = "/calc?calc=" + encodeURIComponent(formula) + "&answer=error";
+                }
+            } catch {
+                src = "/calc?calc=" + encodeURIComponent(formula) + "&answer=error";
+            }
+            document.getElementById("calc").src = src
+        }
+        </script>
+    </body>
+</html>
